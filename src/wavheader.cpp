@@ -22,8 +22,8 @@ struct __attribute((packed)) waveheader {
 };
 
 int main(int argc, char *argv[]) {
-    enum class sampleformat_t { u8, i16, f32 } sampleformat;
-    std::map<std::string, sampleformat_t> sampleformat_map{{"u8", sampleformat_t::u8}, {"i16", sampleformat_t::i16}, {"f32", sampleformat_t::f32}};
+    enum class sampleformat_t { u8, s16, f32 } sampleformat;
+    std::map<std::string, sampleformat_t> sampleformat_map{{"u8", sampleformat_t::u8}, {"s16", sampleformat_t::s16}, {"f32", sampleformat_t::f32}};
 
     uint32_t samplerate;
     uint16_t channelcount;
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
         case 'f': { // sample format
             std::string format = optarg;
             if (sampleformat_map.count(format) == 0) {
-                fprintf(stderr, "possible values for -f are: u8, i16, f32\n");
+                fprintf(stderr, "possible values for -f are: u8, s16, f32\n");
                 return 1;
             }
             sampleformat = sampleformat_map[format];
@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (parsed_args != 5) {
-        fprintf(stderr, "usage: %s -f {u8, i16, f32} -r [samplerate] -c [channelcount] -i [input file] -o [output file]\nnote: stdin/stdout is not supported\n", argv[0]);
+        fprintf(stderr, "usage: %s -f {u8, s16, f32} -r [samplerate] -c [channelcount] -i [input file] -o [output file]\nnote: stdin/stdout is not supported\n", argv[0]);
         return 1;
     }
 
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
     size_t input_filesize = input.tellg();
     input.seekg(0, input.beg);
 
-    std::map<sampleformat_t, uint8_t> bitdepth_map{{sampleformat_t::u8, 8}, {sampleformat_t::i16, 16}, {sampleformat_t::f32, 32}};
+    std::map<sampleformat_t, uint8_t> bitdepth_map{{sampleformat_t::u8, 8}, {sampleformat_t::s16, 16}, {sampleformat_t::f32, 32}};
     uint8_t bitdepth = bitdepth_map[sampleformat];
 
     struct waveheader header;
@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
 
     header.datasize = input_filesize;
 
-    output.write((char*)&header, sizeof(struct waveheader));
+    output.write((char *)&header, sizeof(struct waveheader));
 
     output << input.rdbuf();
 
