@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
         for (size_t i = 0; i < read; i++) {
             switch (sampleformat_out) {
             case sampleformat_t::u8:
-                ((uint8_t *)buffer_out)[i] = ((buffer_f[i] + 1) * (255 / 2));
+                ((uint8_t *)buffer_out)[i] = ((buffer_f[i] + 1) * (255.0f / 2));
                 break;
             case sampleformat_t::s8:
                 ((int8_t *)buffer_out)[i] = buffer_f[i] * 127;
