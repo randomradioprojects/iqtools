@@ -1,5 +1,5 @@
 # iqtools
-various tools to make working with IQ files just a little easier. _At the moment there is only a single tool tho..._
+various tools to make working with IQ files just a little easier
 
 ## tool list
 
@@ -10,8 +10,7 @@ Simple tool to add headers to raw IQ files to play them back in SDR software eas
 tool to convert wav files (u8, s16 and f32) and raw formats (u8, s8, s16 and f32)
 
 # how do i build/install this?
-
-to install simply
+simply
 ```
 mkdir build && cd build
 cmake ..
