@@ -93,7 +93,9 @@ int main(int argc, char *argv[]) {
     printf("samplerate: %lu\n", (long unsigned int)header.samplerate);
     printf("bit depth: %u\n", (unsigned int)header.bitdepth);
 
-    printf("length (based on file size): %zu seconds\n", (size_t)((input_filesize - sizeof(struct waveheader)) / (size_t)header.bytespersec));
+    size_t len_secs = (input_filesize - sizeof(struct waveheader)) / (size_t)header.bytespersec;
+
+    printf("length (based on file size): %zu minutes (%zu seconds)\n", len_secs / 60, len_secs);
 
     input.close();
     return 0;
