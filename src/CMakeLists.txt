@@ -11,6 +11,8 @@ include_directories(${VOLK_INCLUDE_DIRS})
 link_libraries(${VOLK_LIBRARIES})
 
 add_executable(iqtools_wavheader wavheader.cpp)
+add_executable(iqtools_wavinfo wavinfo.cpp)
 add_executable(iqtools_convert convert.cpp)
 install(TARGETS iqtools_wavheader DESTINATION bin)
+install(TARGETS iqtools_wavinfo DESTINATION bin)
 install(TARGETS iqtools_convert DESTINATION bin)
