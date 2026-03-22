@@ -180,11 +180,7 @@ int main(int argc, char *argv[]) {
         header.bytespersample = header.bitdepth / 8;
         header.bytespersec = header.bytespersample * header.samplerate * header.channelcount;
 
-        if (output_wav) {
-            input.seekg(start_offset);
-        } else {
-            input.seekg(0);
-        }
+        input.seekg(start_offset);
     } else if (sampleformat_in == sampleformat_t::none) {
         goto usage;
     } else {
