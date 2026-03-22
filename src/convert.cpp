@@ -189,7 +189,7 @@ int main(int argc, char *argv[]) {
         goto usage;
     } else {
         if (output_wav) {
-            fprintf(stderr, "WAV output unsupported without WAV input, use iqtools-wavheader instead\n", (int)header.bitdepth);
+            fprintf(stderr, "WAV output unsupported without WAV input, use iqtools-wavheader instead\n");
             return 1;
         }
     }
